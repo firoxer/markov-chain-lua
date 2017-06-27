@@ -1,13 +1,13 @@
-local Chain = {}
+local MarkovChain = {}
 
-function Chain:link(a, b)
+function MarkovChain:link(a, b)
    if self.links[a] == nil then self.links[a] = {} end
    if self.links[a][b] == nil then self.links[a][b] = 0 end
 
    self.links[a][b] = self.links[a][b] + 1
 end
 
-function Chain:pickOneAfter(sourceItem)
+function MarkovChain:pickOneAfter(sourceItem)
    if self.links[sourceItem] == nil then return nil end
 
    local totalItemCount = 0
@@ -32,7 +32,7 @@ local function new()
       links = {},
    }
 
-   setmetatable(self, {__index = Chain})
+   setmetatable(self, {__index = MarkovChain})
 
    return self
 end
